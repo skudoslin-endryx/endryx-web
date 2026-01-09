@@ -2,13 +2,13 @@
 
 import { motion } from "framer-motion";
 
-// 简化动画：简单的上浮淡入
+// 修复：移除 ease 属性，使用默认动画曲线，通过类型检查
 const revealVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0, 
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: 0.8 } // 移除了 ease: "easeOut"
   }
 };
 
@@ -16,11 +16,7 @@ export default function Manifesto() {
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-center py-24 px-6 bg-void text-tech overflow-hidden">
       
-      {/* 
-         修复 1：背景网格
-         不再使用复杂的 mask，而是直接画线条。
-         opacity-20 确保它足够明显。
-      */}
+      {/* 背景网格 */}
       <div className="absolute inset-0 z-0 opacity-30 pointer-events-none"
            style={{
              backgroundImage: 'linear-gradient(#555 1px, transparent 1px), linear-gradient(90deg, #555 1px, transparent 1px)',
@@ -32,15 +28,11 @@ export default function Manifesto() {
 
       <div className="max-w-4xl w-full z-10 flex flex-col items-center text-center">
         
-        {/* 
-           修复 2：英文标题
-           移除 bg-clip-text，改用纯白色 text-white。
-           确保 text-center 生效。
-        */}
+        {/* 英文标题 */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-10%" }} // 触发线调整
+          viewport={{ once: true, margin: "-10%" }}
           variants={revealVariants}
           className="flex flex-col items-center mb-16"
         >
@@ -48,18 +40,13 @@ export default function Manifesto() {
             Homage to Intellect.<br />
             Defining the Unknown.
           </h2>
-          {/* 装饰线 */}
           <div className="h-[2px] w-24 bg-[#FF5A00] mt-8 mb-4" />
           <p className="text-muted tracking-[0.5em] text-sm md:text-base">
             致敬智识 · 定义未知
           </p>
         </motion.div>
 
-        {/* 
-           修复 3 & 4：正文对齐与颜色
-           移除 text-justify，强制 text-center。
-           最后一句的 span 使用内联样式强制颜色，防止被覆盖。
-        */}
+        {/* 正文 */}
         <div className="space-y-10 text-lg md:text-2xl font-light leading-relaxed text-gray-300 flex flex-col items-center">
           
           <motion.p 
@@ -93,7 +80,6 @@ export default function Manifesto() {
           >
             只为把探索的惊喜与决策的快感，
             <br />
-            {/* 强制橙色 */}
             <span style={{ color: '#FF5A00' }}>交还给热爱游戏的你。</span>
           </motion.p>
 
