@@ -14,7 +14,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1 }} // 移除 ease
           className="relative group cursor-default flex items-center justify-center"
         >
           {/* ENDR */}
@@ -30,13 +30,7 @@ export default function Hero() {
               Y
             </h1>
 
-            {/* 
-               极度锋利的楔形
-               1. preserveAspectRatio="none": 强制拉伸，不受原始比例限制
-               2. viewBox="0 0 10 24": 定义一个瘦长的画布
-               3. Path: M0 0 L10 12 L0 24 V0 Z -> 直角三角形（左边垂直）
-               4. h-[0.7em]: 高度设为字体高度的 70%，通常对应大写字母的视觉高度
-            */}
+            {/* 极度锋利的楔形 */}
             <motion.div 
               className="relative z-20 flex items-center justify-center"
               style={{ marginLeft: '-0.05em', marginRight: '-0.05em' }}
